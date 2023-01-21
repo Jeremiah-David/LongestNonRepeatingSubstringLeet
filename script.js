@@ -1,4 +1,5 @@
-s = "aab";
+s =
+  "rrqqnboidcietehzgazxzqycqlkbqqbjiuzvvpfarognspmbqoargytwjfxaxblfvldscivuybhrrvujjuartvoecngzoshjfke";
 
 var lengthOfLongestSubstring = function (s) {
   if (s.length < 2) {
@@ -10,8 +11,15 @@ var lengthOfLongestSubstring = function (s) {
   let bigSlice = " ";
   let nextMatch = null;
   for (let i = 0; i < s.length; i++) {
-    let currentSlice = s.slice(i, s.indexOf(s[i], i + 1));
-    console.log(currentSlice, "First Current Slice");
+    //   a = 1    slice 1
+    let currentSlice = " ";
+    if (s.indexOf(s[i], i + 1) === -1) {
+      currentSlice = s.slice(i);
+    } else {
+      currentSlice = s.slice(i, s.indexOf(s[i], i + 1));
+    }
+    console.log(currentSlice, i + "st Current Slice");
+    console.log(i, "I");
     for (let j = 0; j < currentSlice.length; j++) {
       console.log(currentSlice[j], "currentSlice[j]");
       console.log(
@@ -42,5 +50,3 @@ var lengthOfLongestSubstring = function (s) {
 };
 
 console.log(lengthOfLongestSubstring(s));
-
-// console.log(lengthOfLongestSubstring(s));
