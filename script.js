@@ -1,52 +1,46 @@
-s = "abcabcbb";
+s = "aab";
 
 var lengthOfLongestSubstring = function (s) {
-  let array = [[]];
-  let stringIndex = 0;
-  let arrayLength = 0;
-  let arrayIndex = 0;
-
-  while (stringIndex < s.length) {
-    while (
-      array[arrayIndex].indexOf(s[stringIndex]) === -1 &&
-      s[stringIndex] !== undefined
-    ) {
-      array[arrayIndex].push(s[stringIndex]);
-
-      stringIndex++;
-    }
-    if (array[arrayIndex].includes(s[stringIndex])) {
-      arrayIndex++;
-      array.push([]);
-      // console.log(s[stringIndex], "s-stringIndex");
-      // console.log(
-      // s.indexOf(s[stringIndex] + 1),
-      // "s.indexOf(s[stringIndex] + 1)"
-      // );
-      // let s = s.slice(s.indexOf(s[stringIndex]));
-      let substring = s.slice(
-        s.indexOf(s[stringIndex]) + 1,
-        s.indexOf(s[stringIndex] + 1)
+  if (s.length < 2) {
+    return s.length;
+  }
+  if (s.length === 2 && s[0] !== s[1]) {
+    return s.length;
+  }
+  let bigSlice = " ";
+  let nextMatch = null;
+  for (let i = 0; i < s.length; i++) {
+    let currentSlice = s.slice(i, s.indexOf(s[i], i + 1));
+    console.log(currentSlice, "First Current Slice");
+    for (let j = 0; j < currentSlice.length; j++) {
+      console.log(currentSlice[j], "currentSlice[j]");
+      console.log(
+        currentSlice.indexOf(currentSlice[j], j + 1),
+        "currentSlice.indexOf(currentSlice[j], j + 1) "
       );
-      console.log(typeof s, "substring");
-      // if (substring.length) {
-      s = s + substring;
-      // }
-      // for (let i = 0; i < substring.length; i++) {
-      //   array[arrayIndex].push(substring[i]);
-      // }
-      stringIndex++;
+      if (currentSlice.indexOf(currentSlice[j], j + 1) !== -1) {
+        console.log("Going to slice!");
+        console.log("hit!");
+        console.log(
+          currentSlice.indexOf(currentSlice[j], j + 1),
+          "currentSlice.indexOf(currentSlice[j] + 1) hitasdfasdfasdf"
+        );
+
+        currentSlice = currentSlice.slice(
+          0,
+          currentSlice.indexOf(currentSlice[j], j + 1)
+        );
+      }
+    }
+    if (bigSlice.length < currentSlice.length) {
+      bigSlice = currentSlice;
     }
   }
-  for (let i = 0; i < array.length; i++) {
-    console.log(array);
-    if (array[i].length > arrayLength) {
-      arrayLength = array[i].length;
-    }
-  }
-  return arrayLength;
+  console.log(bigSlice.length, "bigSlice.length");
+  console.log(bigSlice, "bigSlice");
+  return bigSlice.length;
 };
 
-lengthOfLongestSubstring(s);
-
 console.log(lengthOfLongestSubstring(s));
+
+// console.log(lengthOfLongestSubstring(s));
